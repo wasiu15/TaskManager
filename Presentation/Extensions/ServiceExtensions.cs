@@ -28,8 +28,8 @@ namespace Presentation.Extensions
                     .WithExposedHeaders("X-Pagination"));
               });
         public static void ConfigureDatabaseContext(this IServiceCollection services, IConfiguration configuration) =>
-            services.AddDbContext<RepositoryContext>(opts => opts.UseSqlite(configuration.GetConnectionString("sqlConnection")));
-        //services.AddDbContext<RepositoryContext>(opts => opts.UseMySql(configuration.GetConnectionString("sqlConnection"), ServerVersion.AutoDetect(configuration.GetConnectionString("sqlConnection"))));
+            services.AddDbContext<RepositoryContext>(opts => opts.UseMySql(configuration.GetConnectionString("sqlConnection"), ServerVersion.AutoDetect(configuration.GetConnectionString("sqlConnection"))));
+            //services.AddDbContext<RepositoryContext>(opts => opts.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
         
         public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
 
@@ -74,7 +74,7 @@ namespace Presentation.Extensions
                     .UseRecommendedSerializerSettings()
                     .UseStorage(
                         new MySqlStorage(
-                            _configuration.GetConnectionString("DefaultConnection"),
+                            _configuration.GetConnectionString("sqlConnection"),
                             new MySqlStorageOptions
                             {
                                 TablesPrefix = "Hangfire",

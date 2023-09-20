@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using TaskmanagerV2.Domain.Enums;
 
 namespace Shared.Utilities
 {
@@ -67,6 +68,12 @@ namespace Shared.Utilities
             return false;
         }
 
+        public static bool IsNotificationTypeValid(CreateNotificationRequest notificationType)
+        {
+            if(notificationType.ToString() == NotificationType.Status_update.ToString() || notificationType.ToString() == NotificationType.Due_date.ToString())
+                return true;
+            return false;
+        }
         public static bool IsInputLetterOnly(string inputString)
         {
             var array = inputString.Split(' ');

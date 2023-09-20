@@ -27,12 +27,12 @@ namespace Infrastructure.Services
             _httpClient = httpClient;
 
             //  CALL THE SHEDULLER
+            //StartSchedulerJob();
         }
 
         public async Task<GenericResponse<IEnumerable<TaskResponse>>> GetAllTasks()
         {
 
-            StartSchedulerJob();
             // THIS WILL GET ALL TASKS FROM THE REPOSITORY
             var allTasks = await _repository.TaskRepository.GetTasks();
 
@@ -182,6 +182,13 @@ namespace Infrastructure.Services
         {
 
             DateTime dueDateInDateFormat;
+            if (task == null)
+                throw new CustomBadRequestException("Sorry, your input is in bad format");
+
+            if (!DateTime.TryParse(task.DueDate.ToString(), out dueDateInDateFormat))
+                throw new CustomBadRequestException("Sorry, the due date is in bad format");
+            //if (!DateTime.TryParse(task.DueDate.ToString(), out dueDateInDateFormat))
+
             string dueDateInStringFormat = task.DueDate.ToString();
 
             //  CHECK IF REQUIRED INPUTS ARE ENTERED

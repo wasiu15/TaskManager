@@ -195,7 +195,7 @@ namespace Infrastructure.Services
             List<TaskResponse> assignedTasksResponse = new List<TaskResponse>();
             foreach (var task in assignedTasks)
             {
-                assignedTasksResponse.Add((TaskResponse)assignedTasks);
+                assignedTasksResponse.Add((TaskResponse)task);
             }
 
             return new GenericResponse<List<TaskResponse>>

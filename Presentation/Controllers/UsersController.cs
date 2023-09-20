@@ -22,7 +22,6 @@ namespace Presentation.Controllers
             _repositoryManager = repositoryManager;
         }
 
-        [AllowAnonymous]
         [HttpGet("getAllUser")]
         public async Task<ActionResult> GetAll()
         {
